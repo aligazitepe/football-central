@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import AddFeed from './addFeedComment';
 import axios from "axios";
 import moment from 'moment';
 import Card from '@material-ui/core/Card';
@@ -8,8 +9,10 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import AddCommentIcon from '@material-ui/icons/AddComment';
 import Avatar from '@material-ui/core/Avatar';
-
+import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
@@ -21,6 +24,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 import { Link } from 'react-router-dom'
 
+const buttonStyles =  { background: "black", color: "white", width: 'auto' }
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
@@ -48,18 +52,24 @@ const useStyles = makeStyles((theme) => ({
 function FeedCards(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  console.log("Feed Item: ", props.feed)
-
+  const [showAddFeed, setShowAddFeed] = useState(false);
+  console.log("PROPS HERE: ", props.location.state)
   function handleDelete (){
     alert("Post deleted!")
-    const id = props.feed;
-
+    const id = props.location.state;
     props.deletePost(id);
   }
 
+  const toggleAddFeed = () => {
+    setShowAddFeed(prev => !prev)
+  }
+
   return (
-     <Link to={{ pathname: `/Discussion/${props.feed._id}`, state: props.feed}}>
-       
+    <div>
+
+      <h1 style={{paddingTop: "120px", position: "sticky",textAlign: "center"}}>Comments📯</h1>
+      <Container maxWidth="lg">
+        <div style={{ height: "5vh" }} />
     <Card className={classes.root}>
       <CardHeader
        avatar={
@@ -72,8 +82,8 @@ function FeedCards(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.feed.topic ? props.feed.topic : "-"}
-        subheader={props.feed.createdAt ? moment(props.feed.createdAt).format("MMMM DD, YYYY") : "-"}
+        title={props.location.state.topic ? props.location.state.topic : "-"}
+        subheader={props.location.state.createdAt ? moment(props.location.state.createdAt).format("MMMM DD, YYYY") : "-"}
       />
       <CardMedia
         className={classes.media}
@@ -82,28 +92,32 @@ function FeedCards(props) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.feed.body ? props.feed.body : "-"}
+          {props.location.state.body ? props.location.state.body : "-"}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton onClick={handleDelete}
-          className={clsx(classes.expand)}
-          
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <DeleteOutlineIcon />
-        </IconButton>
+          <Button style={buttonStyles} onClick={toggleAddFeed} >Comment!</Button>
       </CardActions>
    
+      {showAddFeed ?  <AddFeed id={props.location.state._id} onSubmit={toggleAddFeed}/> : null}
+
+
+      {
+        props.location.state.comments.length ?
+          props.location.state.comments.map(comment => (
+            <Card className={classes.root}>
+              <div style={{ padding: 10, fontSize: 20, marginLeft: 15 }}>
+                {comment}
+              </div>
+            </Card>
+          ))
+        :
+            <div>No comments yet!</div>
+      } 
     </Card>
-    </Link>
+        
+      </Container>
+    </div>
     
   );
 }

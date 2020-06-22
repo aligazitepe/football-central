@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 function dbConfig() {
-    mongoose.connect('mongodb://localhost:27017/new',
+    mongoose.connect('mongodb://localhost:27017/admin',
       {
         useNewUrlParser: true, 
         useUnifiedTopology: true, 
