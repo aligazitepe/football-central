@@ -30,21 +30,30 @@ function createPost (req, res) {
 };
 
 function deletePost (req, res) {
-    const { topic, body } = req.body;
-    if(topic || body ) {
-        res.send({
-            type: "success",
-            message: "Post Deleted."
-        }).then(post => {
-            Post.deleteOne({ topic, body }, function(err, result) {
-                if (err) {
-                  res.send(err);
-                } else {
-                  res.send(result);
-                }
-              });
-        })
-    }    
+   // const { topic, body } = req.body;
+   console.log(req)
+const {id} = req.params;
+
+     Post.deleteOne({_id: id}, (err, result) => {
+                      if (err) {
+                        res.send(err);
+                      } else {
+                        res.send(result);
+                      }
+
+    })
+
+
+
+    // if(topic || body ) {
+    //     res.send({
+    //         type: "success",
+    //         message: "Post Deleted."
+    //     }).then(post => {
+    //         Post.deleteOne({ topic, body }, function(err, result) {
+    //           });
+    //     })
+    // }    
 };
 // SQL
 // Gets all posts from db, data can be named anything.
@@ -72,4 +81,5 @@ function getAllPosts (req, res) {
 module.exports = {
     createPost,
     getAllPosts,
+    deletePost,
 };

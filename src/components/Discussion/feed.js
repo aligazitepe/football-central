@@ -18,6 +18,9 @@ import ShareIcon from '@material-ui/icons/Share';
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+
+import { Link } from 'react-router-dom'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
@@ -42,25 +45,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RecipeReviewCard(props) {
+function FeedCards(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   console.log("Feed Item: ", props.feed)
 
   function handleDelete (){
     alert("Post deleted!")
+    const id = props.feed;
 
-    props.deletePost({
-      topic,
-      body,
-    });
+    props.deletePost(id);
   }
 
   return (
+     <Link to={`/Discussion/${props.feed.id}`}>
     <Card className={classes.root}>
       <CardHeader
        avatar={
-        <Avatar aria-label="recipe" className={classes.avatar}>
+        <Avatar style={{backgroundColor:"rgba(33, 181, 100, 0.93)"}}aria-label="recipe" className={classes.avatar}>
           
         </Avatar>
       }
@@ -74,7 +76,7 @@ function RecipeReviewCard(props) {
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image=""
         title="Paella dish"
       />
       <CardContent>
@@ -100,8 +102,9 @@ function RecipeReviewCard(props) {
       </CardActions>
    
     </Card>
+    </Link>
     
   );
 }
 
-export default RecipeReviewCard
+export default FeedCards
