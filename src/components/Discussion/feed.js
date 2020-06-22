@@ -19,7 +19,9 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
+import { Link } from 'react-router-dom'
 import { deletePost } from "../../redux/actions/postActions";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +47,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function FeedReviewCard(props) {
+
+function FeedCards(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 /*   console.log("Feed Item: ", props.feed)
@@ -55,17 +58,22 @@ const body = props.feed.body;
 
   function handleDelete (){
     alert("Post deleted!")
+    const id = props.feed;
+
+    props.deletePost(id);
      deletePost({
       topic,
       body, 
     });  
+
   }
 
   return (
+     <Link to={`/Discussion/${props.feed.id}`}>
     <Card className={classes.root}>
       <CardHeader
        avatar={
-        <Avatar aria-label="recipe" className={classes.avatar}>
+        <Avatar style={{backgroundColor:"rgba(33, 181, 100, 0.93)"}}aria-label="recipe" className={classes.avatar}>
           
         </Avatar>
       }
@@ -79,7 +87,7 @@ const body = props.feed.body;
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image=""
         title="Paella dish"
       />
       <CardContent>
@@ -105,8 +113,11 @@ const body = props.feed.body;
       </CardActions>
    
     </Card>
+    </Link>
     
   );
 }
 
-export default FeedReviewCard
+
+export default FeedCards
+
