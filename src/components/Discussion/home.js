@@ -13,7 +13,7 @@ import Feed from "./feed";
 import MainPost from './mainpost';
 import AddFeed from './addFeed';
 import { withRouter } from "react-router-dom";
-import { getAllPosts } from "../../redux/actions/postActions";
+import { getAllPosts , deletePost } from "../../redux/actions/postActions";
 import { connect } from "react-redux";
 
 
@@ -44,6 +44,25 @@ function SimpleContainer(props) {
   // }
  
 
+    useEffect(()=>{
+      props.getAllPosts();
+    },[])
+
+    useEffect(()=>{
+      if(JSON.stringify(posts) == JSON.stringify(props.posts)) {
+
+      } else {
+        setPosts(props.posts);
+      }
+    }, [posts, props.posts])
+    
+
+    function buttonRoute (){
+        props.history.push('/league/NewPost')
+    }
+  return (
+
+
   const scrollTop = () =>{
     window.scrollTo({top: 0, behavior: 'smooth'});
   };
@@ -55,6 +74,7 @@ function SimpleContainer(props) {
 
   return (
     <div>
+
 
 <h1 style={{paddingTop: "120px", position: "sticky",textAlign: "center"}}>Discussion Boards📯</h1>
       <Container maxWidth="lg">
@@ -78,6 +98,25 @@ function SimpleContainer(props) {
           <ArrowUpwardIcon style={{ color:"white"}}/>
         </Fab>
       </Container>
+
+        
+          <Container maxWidth="lg">
+            <div style={{ height: "5vh" }} />  
+            {
+              posts.length ?
+                posts.map(item => (
+                    <Feed  deletePost={deletePost} feed={item} />
+                ))
+              :
+                  <div>NO POSTS</div>
+            }
+            
+            <div style={{ height: "2vh" }} /> 
+            <Fab color="primary" style={{position: "fixed",bottom:"5vh", right: "22vw"}}aria-label="add" onClick={buttonRoute}>
+        <AddIcon />
+      </Fab>
+          </Container>
+     
     </div>
   );
 }

@@ -20,6 +20,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 import { Link } from 'react-router-dom'
+import { deletePost } from "../../redux/actions/postActions";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,16 +47,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function FeedCards(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  console.log("Feed Item: ", props.feed)
+/*   console.log("Feed Item: ", props.feed)
+ */
+const topic = props.feed.topic;
+const body = props.feed.body;
 
   function handleDelete (){
     alert("Post deleted!")
     const id = props.feed;
 
     props.deletePost(id);
+     deletePost({
+      topic,
+      body, 
+    });  
+
   }
 
   return (
@@ -107,4 +118,6 @@ function FeedCards(props) {
   );
 }
 
+
 export default FeedCards
+
