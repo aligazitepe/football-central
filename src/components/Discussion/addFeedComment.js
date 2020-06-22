@@ -11,7 +11,7 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 
 import { OutlinedInput, Button } from "@material-ui/core";
-import { createPost } from "../../redux/actions/postActions";
+import { addPostComment } from "../../redux/actions/postActions";
 import { connect } from "react-redux";
 // connect passes actions to the component as props and it connects react with redux
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   margin2: {
     margin: theme.spacing(1),
-    marginTop: 30,
+    marginTop: 5,
   },
   feedcontainer: {
     marginTop: 70,
@@ -36,37 +36,33 @@ const useStyles = makeStyles((theme) => ({
 const buttonStyles = { background: "black", color: "white" }
 
 function BasicTextFields(props) {
+  console.log("POST ID: ", props.id)
   const classes = useStyles();
-  const [topic, setTopic] = useState("");
   const [body, setBody] = useState("");
 
   const addFeedHander = () => {
-    if (topic === "" || body === "") {
-      alert("Both fields are required!");
+    if (props.id === "") {
+      alert("No post id found!");
+    } else if (body === "") {
+      alert("Comment text is empty!");
     } else {
-      props.createPost({
-        topic,
-        body,
-        comments: []
-      }, () => props.history.push('/Discussion'));
+      props.addPostComment({
+        id: props.id,
+        comment: body,
+      }, () => props.onSubmit());
     }
   };
 
   return (
-    <div style={{paddingTop: "170px", position: "sticky",textAlign: "center"}}>
+    <div style={{paddingTop: "100px", position: "sticky",textAlign: "center"}}>
      
-      <h1>Add a new post...📯</h1>
+      <h1>Add a new comment...💬</h1>
       <Container maxWidth="lg">
         <FormControl fullWidth className={classes.margin}>
-          <InputLabel htmlFor="standard-adornment-amount">Topic</InputLabel>
-          <Input
-            id="standard-adornment-amount"
-            value={topic}
-            onChange={(event) => setTopic(event.target.value)}
-          />
+         
         </FormControl>
         <FormControl fullWidth className={classes.margin2} variant="outlined">
-          <InputLabel htmlFor="standard-adornment-amount">Body</InputLabel>
+          <InputLabel htmlFor="standard-adornment-amount">Comment</InputLabel>
           <OutlinedInput
             id="outlined-adornment-amount"
             value={body}
@@ -87,4 +83,4 @@ function BasicTextFields(props) {
   );
 }
 
-export default connect(null, { createPost })(withRouter(BasicTextFields));
+export default connect(null, { addPostComment })(withRouter(BasicTextFields));
