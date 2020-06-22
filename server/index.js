@@ -1,26 +1,22 @@
 const express = require('express');
 const cors = require("cors");
-const logger = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require("body-parser");
 // Import from custom files
 const dbConnection = require ('./config/dbConfig');
+const userRoutes = require('./controllers/auth');
+const postRoutes = require('./controllers/post')
+const passportConfig = require('./config/passportConfig');
 const appRoutes = require('./router');
-const SECRET = process.env.SECRET || 'this is not very secure';
-const corsConfig = {
-    // REMOVE-START
-    origin: 'http://localhost:3000',
-    credentials: true,
-    // REMOVE-END
-  };
+
 const app = express();
 
-app.use(logger('tiny'))
-
+// Passport config
+passportConfig(passport);
 
 // Add midlewares
-app.use(cors(corsConfig));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -28,23 +24,15 @@ app.use(bodyParser.json());
 
 
 // Session
-app.use(
-    session({
-      name: 'sid',
-      saveUninitialized: false,
-      resave: false,
-      secret: SECRET,
-      cookie: {
-        maxAge: 1000 * 60 * 60, // 1hr
-        sameSite: true,
-        httpOnly: false,
-        // we would want to set secure=true in a production environment
-        secure: false,
-      },
-    })
-  );
+app.use(session({
+    secret: 'secretkey',
+    resave: true,
+    saveUninitialized: true
+}))
 
-
+// app.use(express.static('uploads'))
+app.use(passport.initialize())
+app.use(passport.session())
 
 // DB connection
 dbConnection();
