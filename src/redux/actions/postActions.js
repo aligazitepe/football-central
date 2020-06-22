@@ -5,8 +5,7 @@ export const CREATE_POST_SUCCESS = "CREATE_POST_SUCCESS";
 export const CREATE_POST_FAIL = "CREATE_POST_FAIL";
 export const GET_ALL_POST_SUCCESS = "GET_ALL_POST_SUCCESS";
 export const GET_ALL_POST_FAIL = "GET_ALL_POST_FAIL";
-export const DELETE_POST_FAIL = "DELETE_POST"
-export const DELETE_POST_SUCCESS ="DELETE_POST_SUCCESS"
+export const DELETE_POST = "DELETE_POST"
 // dispatch from redux thunk
 // data is object {topic, body}
 export function createPost(data, cb) {
@@ -56,19 +55,22 @@ export function getAllPosts(data) {
   };
 }
 
-export function deletePost(postId) {
+export function deletePost(data) {
   return (dispatch) => {
     axios
-      .delete(ENDPOINT + "/deletePost/" + postId)
+      .get(ENDPOINT + "/deletePost")
       .then(function (response) {
         console.log("POSTS RESPONSE: ", response.data);
         if (response.data.type === "success") {
           dispatch({
-            type: DELETE_POST_SUCCESS,
-            payload: postId,
+            type: GET_ALL_POST_SUCCESS,
+            payload: response.data.allPosts,
           });
         } else {
-         console.log("failed");
+          dispatch({
+            type: GET_ALL_POST_FAIL,
+          });
+          alert("Post Failed.");
         }
       })
       .catch(function (error) {

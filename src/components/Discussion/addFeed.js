@@ -33,8 +33,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const buttonStyles = { background: "black", color: "white" }
-
 function BasicTextFields(props) {
   const classes = useStyles();
   const [topic, setTopic] = useState("");
@@ -47,17 +45,14 @@ function BasicTextFields(props) {
       props.createPost({
         topic,
         body,
-      }, () => props.history.push('/Discussion'));
+      }, () => props.history.push('/league/Discussion'));
     }
-    if(props.onSubmit !== undefined)
-      props.onSubmit();
-    // props.onSubmit && props.onSubmit()
   };
 
   return (
     <div style={{paddingTop: "170px", position: "sticky",textAlign: "center"}}>
      
-      {/* <h1>Add a new post...📯</h1> */}
+      <h1>Add a new post...📯</h1>
       <Container maxWidth="lg">
         <FormControl fullWidth className={classes.margin}>
           <InputLabel htmlFor="standard-adornment-amount">Topic</InputLabel>
@@ -80,7 +75,7 @@ function BasicTextFields(props) {
         </FormControl>
         <Button
           onClick={addFeedHander}
-          style={buttonStyles}
+          style={{ background: "black", color: "white" }}
         >
           ADD
         </Button>
