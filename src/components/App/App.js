@@ -19,7 +19,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Logout from '../Logout/Logout';
 import Userbar from '../Userbar/Userbar';
-
+import Quiz from '../Quiz/Quiz'
 
 
 function App() {
@@ -44,6 +44,7 @@ function App() {
           <Route exact path='/Discussion'component={Discussion}/>
           <Route path='/Discussion/:id'component={DiscussionDetails}/>
           <Route path='/NewPost' component={Newpost}/>
+          <Route path='/Quiz' component={Quiz}/>
           <Route
             path="/login"
             render={(props) => (

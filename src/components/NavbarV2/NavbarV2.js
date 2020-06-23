@@ -20,6 +20,7 @@ const NavbarV2 = () => {
           <Link to='/league/525/Ligue-1'>Ligue 1</Link>
           <Link to='/league/766/Primeira-Liga'>Primeira Liga</Link>
           <Link to='/Discussion'>Discussion Page</Link>
+          <Link to='/Quiz'>Quiz</Link>
         </div>
       </div> 
     </header>
