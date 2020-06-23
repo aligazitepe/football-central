@@ -1,0 +1,32 @@
+.registerContainer {
+  font-family: 'Cabin', 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.registerForm {
+  margin-top: 25px;
+}
+
+.emailInput, .passwordInput {
+  padding: 0px 20px;
+  font-weight: 2em;
+}
+
+.registerBtn {
+  margin-top: 35px;
+}
+
+.login-submit {
+  font-size: 0.8em;
+  background-color: #69ba6f;
+  color: white;
+}
+
+button:disabled {
+  /* Left the same as active for now. */
+  background-color: #69ba6f;
+}

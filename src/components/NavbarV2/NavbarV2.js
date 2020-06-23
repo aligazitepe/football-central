@@ -5,7 +5,7 @@ import './NavbarV2.css';
 import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
 
-const NavbarV2 = () => {
+const NavbarV2 = ({isAuthenticated}) => {
   return (
     <header className="main_h sticky">
       <div className="row">
@@ -20,8 +20,12 @@ const NavbarV2 = () => {
           <Link to='/league/525/Ligue-1'>Ligue 1</Link>
           <Link to='/league/766/Primeira-Liga'>Primeira Liga</Link>
           <Link to='/Discussion'>Discussion Page</Link>
+          {!isAuthenticated
+            ? <Link to='/Login'><span role="img" aria-label="profile">👤</span></Link>
+            : <Link to='/Logout'><span role="img" aria-label="profile">🌎</span></Link>
+          }
         </div>
-      </div> 
+      </div>
     </header>
   );
 }
