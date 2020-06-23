@@ -88,7 +88,7 @@ function FeedCards(props) {
       <CardMedia
         className={classes.media}
         image=""
-        title="Paella dish"
+        title="Card"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -103,18 +103,20 @@ function FeedCards(props) {
 
 
       {
-        props.location.state.comments.length ?
-          props.location.state.comments.map(comment => (
-            <Card className={classes.root}>
-              <div style={{ padding: 10, fontSize: 20, marginLeft: 15 }}>
-                {comment}
-              </div>
-            </Card>
-          ))
-        :
-            <div>No comments yet!</div>
-      } 
-    </Card>
+    props.location.state.comments.length ?
+    props.location.state.comments.map(comment => (
+      <Card className={classes.root}>
+        <div style={{ marginLeft: 15}}>Posted by: anonymous</div>
+        <div style={{ padding: 10, fontSize: 20, marginLeft: 15 }}>
+          {comment}
+        </div>
+    <div style={{ padding: 10}}>{" "}{moment(Date.now()).format("MMMM DD, YYYY")}</div>
+      </Card>
+    ))
+  :
+      <div>No comments yet!</div>
+} 
+</Card>
         
       </Container>
     </div>
