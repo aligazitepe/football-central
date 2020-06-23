@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import auth from '../../utils/auth';
 import apiService from '../../services/ApiService';
+import './Register.css';
 
 const initialState = {
   email: '',
@@ -23,7 +24,6 @@ const Register = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Add logic to send send a request to the API service /register
-    // REMOVE-START
     const { email, password, firstName, lastName } = state;
     const user = { email, password, firstName, lastName };
     const res = await apiService.register(user);
@@ -31,13 +31,10 @@ const Register = (props) => {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      // REMOVE-END
       // This sets isAuthenticated = true and redirects to profile
       props.setIsAuthenticated(true);
       auth.login(() => props.history.push('/league/Discussion'));
-      // REMOVE-START
     }
-    // REMOVE-END
   };
 
   const validateForm = () => {
@@ -47,39 +44,39 @@ const Register = (props) => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="registerContainer">
+      <h2>REGISTER</h2>
+      <form className="registerForm" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="name@mail.com"
+          placeholder="Email"
           name="email"
           value={state.email}
           onChange={handleChange}
         />
         <input
           type="password"
-          placeholder="supersecretthingy"
+          placeholder="Password"
           name="password"
           value={state.password}
           onChange={handleChange}
         />
         <input
           type="text"
-          placeholder="Name"
+          placeholder="First Name"
           name="firstName"
           value={state.firstName}
           onChange={handleChange}
         />
         <input
           type="text"
-          placeholder="Nameson"
+          placeholder="Last Name"
           name="lastName"
           value={state.lastName}
           onChange={handleChange}
         />
-        <button className="form-submit" type="submit" disabled={validateForm()}>
-          &nbsp;Register&nbsp;
+        <button className="registerBtn" type="submit" disabled={validateForm()}>
+          &nbsp;Register for Football Central&nbsp;
         </button>
       </form>
     </div>

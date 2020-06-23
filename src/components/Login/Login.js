@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import auth from '../../utils/auth';
 import apiService from '../../services/ApiService';
+import './Login.css';
 
 const initialState = {
   email: '',
@@ -21,7 +22,6 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Add logic to send a request to API service /login
-    // REMOVE-START
     const { email, password } = state;
     const user = { email, password };
     const res = await apiService.login(user);
@@ -29,13 +29,10 @@ const Login = (props) => {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      // REMOVE-END
       // This sets isAuthenticated = true and redirects to profile
       props.setIsAuthenticated(true);
-      auth.login(() => props.history.push('/league/Discussion'));
-      // REMOVE-START
+      auth.login(() => props.history.push('/'));
     }
-    // REMOVE-END
   };
 
   const validateForm = () => {
@@ -43,26 +40,31 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="formContainer">
+      <h2>LOGIN</h2>
       <form className="form" onSubmit={handleSubmit}>
         <input
+          className="emailInput"
           type="text"
-          placeholder="name@mail.com"
+          placeholder="Email"
           name="email"
           value={state.email}
           onChange={handleChange}
         />
         <input
+          className="emailInput"
           type="password"
-          placeholder="supersecretthingy"
+          placeholder="Password"
           name="password"
           value={state.password}
           onChange={handleChange}
         />
-        <button className="form-submit" type="submit" disabled={validateForm()}>
-          &nbsp;Login&nbsp;
+        <button className="login-submit" type="submit" disabled={validateForm()}>
+          &nbsp;LOGIN&nbsp;
         </button>
+        <a className="register" href="/register">
+          &nbsp;Register?&nbsp;
+        </a>
       </form>
     </div>
   );
