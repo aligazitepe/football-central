@@ -1,5 +1,5 @@
 const express = require("express");
-const Post = require("../model/Post");
+const Post = require("../models/Post");
 
 
 function createPost (req, res) {
