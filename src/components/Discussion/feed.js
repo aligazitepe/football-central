@@ -61,7 +61,7 @@ function FeedCards(props) {
      <Link to={{ pathname: `/Discussion/${props.feed._id}`, state: props.feed}}>
        
     <Card className={classes.root}>
-      <CardHeader
+      <CardHeader 
        avatar={
         <Avatar style={{backgroundColor:"rgba(33, 181, 100, 0.93)"}}aria-label="recipe" className={classes.avatar}>
           
@@ -78,10 +78,10 @@ function FeedCards(props) {
       <CardMedia
         className={classes.media}
         image=""
-        title="Paella dish"
+        title="Topic"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography  style={{fontSize: 20, color:"black"}} variant="body2" color="textSecondary" component="p">
           {props.feed.body ? props.feed.body : "-"}
         </Typography>
       </CardContent>

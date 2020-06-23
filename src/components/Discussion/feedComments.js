@@ -91,7 +91,7 @@ function FeedCards(props) {
         title="Card"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography  style={{fontSize: 20, color:"black"}} variant="body2" color="textSecondary" component="p">
           {props.location.state.body ? props.location.state.body : "-"}
         </Typography>
       </CardContent>
