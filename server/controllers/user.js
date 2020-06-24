@@ -49,7 +49,7 @@ const profile = async (req, res) => {
     const { _id, firstName, lastName } = req.user;
     const user = { _id, firstName, lastName };
     res.status(201).send(user);
-  } catch {
+  } catch(error) {
     res.status(404).send({ error, message: 'User not found' });
   }
   // REMOVE-END

@@ -3,7 +3,8 @@ const Post = require("../models/Post");
 
 
 function createPost (req, res) {
-    const { topic, body } = req.body;
+    const { topic, body ,createdBy} = req.body;
+    // console.log("Made by:",createdBy)
     if(!topic || !body ) {
         res.send({
             type: "error",
@@ -14,10 +15,12 @@ function createPost (req, res) {
         let newPost = new Post({
             topic,
             body,
+            createdBy
         }) 
             
             newPost.save()
             .then(post => {
+                console.log("post done ",post)
                 res.send({
                     post,
                     type: 'success',
@@ -83,8 +86,11 @@ function createComment (req, res) {
             if(posts) {
                 console.log("Post with id: ", posts);
                 if(posts.length) {
+                    let comment=req.body.comment;
+                    comment['createdAt']=Date.now();
                     let comments = posts[0].comments;
-                    comments.push(req.body.comment);
+                    
+                    comments.push(comment);
 
                     Post.update({ _id: req.body.id }, {
                         comments

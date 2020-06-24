@@ -31,9 +31,19 @@ const Login = (props) => {
     } else {
       // This sets isAuthenticated = true and redirects to profile
       props.setIsAuthenticated(true);
+      
+      // auth.login(() => props.history.push('/'));
+
+      setUserInfo(res);
       auth.login(() => props.history.push('/'));
+      // REMOVE-START
     }
   };
+  const setUserInfo= (userObj) =>
+  {
+    localStorage.setItem("currentUser",JSON.stringify(userObj))
+
+  }
 
   const validateForm = () => {
     return !state.email || !state.password;

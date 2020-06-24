@@ -15,6 +15,11 @@ const PostSchema = mongoose.Schema({
         type: Array,
         required: true
     },
+    // push user information inside object
+    createdBy:{
+        type:Object
+        // type should be userID
+    },
 
     createdAt: {
         type: Date,

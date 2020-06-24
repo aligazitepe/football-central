@@ -106,11 +106,11 @@ function FeedCards(props) {
     props.location.state.comments.length ?
     props.location.state.comments.map(comment => (
       <Card className={classes.root}>
-        <div style={{ marginLeft: 15}}>Posted by: anonymous</div>
+        <div style={{ marginLeft: 15}}>Posted by: {comment.commentFirstName? comment.commentFirstName+" "+comment.commentLastName:"anonymous"}</div>
         <div style={{ padding: 10, fontSize: 20, marginLeft: 15 }}>
-          {comment}
+          {typeof comment == 'string' ? comment : comment['text']}
         </div>
-    <div style={{ padding: 10}}>{" "}{moment(Date.now()).format("MMMM DD, YYYY")}</div>
+    <div style={{ padding: 10}}>{" "}{moment(comment.createdAt ).format("MMMM DD, YYYY")}</div>
       </Card>
     ))
   :
