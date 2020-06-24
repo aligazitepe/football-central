@@ -46,13 +46,26 @@ function BasicTextFields(props) {
     } else if (body === "") {
       alert("Comment text is empty!");
     } else {
+      let user = getUserInfo();
+
+      let commentObj={
+        text:body,
+        commentFirstName:user.firstName,
+        commentLastName:user.lastName
+      }
+      
       props.addPostComment({
         id: props.id,
-        comment: body,
+        comment: commentObj,
       }, () => props.onSubmit());
     }
   };
 
+ const getUserInfo=()=>
+  {
+   let user= JSON.parse( localStorage.getItem("currentUser") );
+   return user;
+  }
   return (
     <div style={{paddingTop: "100px", position: "sticky",textAlign: "center"}}>
      

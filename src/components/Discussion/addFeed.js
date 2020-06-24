@@ -41,16 +41,25 @@ function BasicTextFields(props) {
   const [body, setBody] = useState("");
 
   const addFeedHander = () => {
+    let  user=getUserInfo();
     if (topic === "" || body === "") {
       alert("Both fields are required!");
     } else {
       props.createPost({
         topic,
         body,
+        createdBy:user,
         comments: []
       }, () => props.history.push('/Discussion'));
     }
   };
+
+  const getUserInfo=()=>
+  {
+   let user= JSON.parse( localStorage.getItem("currentUser") );
+   return user;
+  }
+  ////copy get user function . 
 
   return (
     <div style={{paddingTop: "170px", position: "sticky",textAlign: "center"}}>

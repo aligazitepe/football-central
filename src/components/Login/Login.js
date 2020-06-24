@@ -32,11 +32,17 @@ const Login = (props) => {
       // REMOVE-END
       // This sets isAuthenticated = true and redirects to profile
       props.setIsAuthenticated(true);
+      setUserInfo(res);
       auth.login(() => props.history.push('/league/Discussion'));
       // REMOVE-START
     }
     // REMOVE-END
   };
+  const setUserInfo= (userObj) =>
+  {
+    localStorage.setItem("currentUser",JSON.stringify(userObj))
+
+  }
 
   const validateForm = () => {
     return !state.email || !state.password;

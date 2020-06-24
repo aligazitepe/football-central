@@ -20,6 +20,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 import { Link } from 'react-router-dom'
+// import { create } from "../../../server/model/Post";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +49,13 @@ const useStyles = makeStyles((theme) => ({
 function FeedCards(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const userObj=props.feed.createdBy;
+  let createdBy="";
+    if(userObj && userObj['firstName'] &&  userObj['lastName']) {
+      createdBy=" by: " + userObj['firstName'] + " "+ userObj['lastName'];
+    }
+
+
   console.log("Feed Item: ", props.feed)
 
   function handleDelete (){
@@ -72,7 +80,7 @@ function FeedCards(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.feed.topic ? props.feed.topic : "-"}
+        title={props.feed.topic ? props.feed.topic + createdBy : "-"   }
         subheader={props.feed.createdAt ? moment(props.feed.createdAt).format("MMMM DD, YYYY") : "-"}
       />
       <CardMedia

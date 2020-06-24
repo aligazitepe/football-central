@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 import './Userbar.css';
 
 const Navbar = ({ isAuthenticated }) => {
+
+
+  let user= localStorage.getItem("currentUser");
+
+  user=user ? JSON.parse(user) : null;
+
   return (
     <div className="stg">
     <div className="container borderXwidth">
       <ul>
-
-        {isAuthenticated ? (
+        { user &&  Object.keys(user).length ? (
           <React.Fragment>
             <li>
               <Link to="/profile">Profile</Link>

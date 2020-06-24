@@ -10,10 +10,11 @@ const Logout = (props) => {
   };
 
   const handleAuth = () => {
+    localStorage.removeItem("currentUser")
     props.setIsAuthenticated(false);
     auth.logout(() => props.history.push('/'));
   };
-
+// 
   return (
     <div>
       <h2>Are you sure you want to log out?</h2>
