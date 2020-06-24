@@ -28,14 +28,19 @@ const Register = (props) => {
     const user = { email, password, firstName, lastName };
     const res = await apiService.register(user);
     if (res.error) {
-      alert(`${res.message}`);
+      //alert(`${res.message}`);
       setState(initialState);
     } else {
       // This sets isAuthenticated = true and redirects to profile
+      setUserInfo(res);
       props.setIsAuthenticated(true);
       auth.login(() => props.history.push('/'));
     }
   };
+
+  const setUserInfo = (userObj) => {
+    localStorage.setItem("currentUser",JSON.stringify(userObj))
+  }
 
   const validateForm = () => {
     return (
