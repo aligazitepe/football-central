@@ -26,13 +26,10 @@ const Login = (props) => {
     const user = { email, password };
     const res = await apiService.login(user);
     if (res.error) {
-      alert(`${res.message}`);
       setState(initialState);
     } else {
       // This sets isAuthenticated = true and redirects to profile
       props.setIsAuthenticated(true);
-      
-      // auth.login(() => props.history.push('/'));
 
       setUserInfo(res);
       auth.login(() => props.history.push('/'));

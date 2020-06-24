@@ -4,7 +4,8 @@
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
-  align-items: center
+  align-items: center;
+  padding-top: 120px;
 }
 
 .registerForm {

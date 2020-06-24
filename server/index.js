@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const SECRET = process.env.SECRET || 'this is not very secure';
 // Import from custom files
 const dbConnection = require ('./config/dbConfig');
-const postRoutes = require('./controllers/post')
 const appRoutes = require('./router');
 const corsConfig = {
     origin: 'http://localhost:3000',

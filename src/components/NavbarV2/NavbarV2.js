@@ -1,5 +1,6 @@
 import React from 'react';
 import './NavbarV2.css';
+import logoutImg from '../../assets/sign_out.png';
 
 // My Components
 import Logo from '../Logo/Logo';
@@ -21,10 +22,11 @@ const NavbarV2 = ({isAuthenticated}) => {
           <Link to='/league/766/Primeira-Liga'>Primeira Liga</Link>
           <Link to='/Discussion'>Discussion Page</Link>
           <Link to='/Quiz'>Quiz</Link>
-          {!isAuthenticated
-            ? <Link to='/Profile'><span role="img" aria-label="profile">👤</span></Link>
-            : <Link to='/Logout'><span role="img" aria-label="profile">🌎</span></Link>
-          }
+            {console.log('INFO: isAuthenticated =', isAuthenticated)}
+            {!isAuthenticated
+              ? <Link to='/Login' className="imgContainer"><span className="loginImg" role="img" aria-label="profile">👤</span></Link>
+              : <Link to='/Logout' className="imgContainer"><span className="loginImg" role="img" aria-label="profile">📤</span></Link>
+            }
         </div>
       </div>
     </header>

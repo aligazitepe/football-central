@@ -13,7 +13,7 @@ const Navbar = ({ isAuthenticated }) => {
     <div className="stg">
     <div className="container borderXwidth">
       <ul>
-        { user &&  Object.keys(user).length ? (
+        { isAuthenticated ? (
           <React.Fragment>
             <li>
               <Link to="/profile">Profile</Link>
