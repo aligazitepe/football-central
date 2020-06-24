@@ -22,7 +22,7 @@ const NavbarV2 = ({isAuthenticated}) => {
           <Link to='/Discussion'>Discussion Page</Link>
           <Link to='/Quiz'>Quiz</Link>
           {!isAuthenticated
-            ? <Link to='/Login'><span role="img" aria-label="profile">👤</span></Link>
+            ? <Link to='/Profile'><span role="img" aria-label="profile">👤</span></Link>
             : <Link to='/Logout'><span role="img" aria-label="profile">🌎</span></Link>
           }
         </div>

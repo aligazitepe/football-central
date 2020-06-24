@@ -1,6 +1,9 @@
 // REMOVE-START
 const bcrypt = require('bcrypt');
 const User = require('./../models/User');
+const fs = require('fs');
+const { promisify } = require("util");
+const pipeline = promisify(require("stream").pipeline)
 // REMOVE-END
 
 const create = async (req, res) => {
@@ -70,4 +73,21 @@ const logout = (req, res) => {
   // REMOVE-END
 };
 
-module.exports = { create, login, profile, logout };
+
+const createUpload = async (req, res, next) => {
+
+  const { 
+    file, 
+    body: {name}
+  } = req;
+
+  if(file.detectedFileExtention != ".jpg") next(new Error("invalid file type"));
+  const fileName = name + Math.floor(Math.random * 1000) + file.detectedFileExtention;
+  await pipeline(file.stream, fs.createWriteStream(`${__dirname}/../../public/images/${fileName}`))
+  res.send("File uploaded as " + fileName)
+};
+
+module.exports = { create, login, profile, logout, createUpload };
+// create write stream let writer = fs.createWriteStream(path)
+// writer.write(whatever data)
+// writer.end

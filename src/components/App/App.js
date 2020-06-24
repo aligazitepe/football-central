@@ -20,7 +20,7 @@ import Register from '../Register/Register';
 import Logout from '../Logout/Logout';
 import Userbar from '../Userbar/Userbar';
 import Quiz from '../Quiz/Quiz'
-
+import Profile from '../Profile/profile'
 
 function App() {
   const initialState = auth.isAuthenticated();
@@ -45,6 +45,7 @@ function App() {
           <Route path='/Discussion/:id'component={DiscussionDetails}/>
           <Route path='/NewPost' component={Newpost}/>
           <Route path='/Quiz' component={Quiz}/>
+          <Route path='/Profile' component={Profile}/>
           <Route
             path="/login"
             render={(props) => (
