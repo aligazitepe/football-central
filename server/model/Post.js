@@ -20,10 +20,7 @@ const PostSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-<<<<<<< HEAD
     
-=======
->>>>>>> 93d3c49... Restoration of some removed files.
 
     });
 
