@@ -28,7 +28,6 @@ const Register = (props) => {
     const user = { email, password, firstName, lastName };
     const res = await apiService.register(user);
     if (res.error) {
-      //alert(`${res.message}`);
       setState(initialState);
     } else {
       // This sets isAuthenticated = true and redirects to profile

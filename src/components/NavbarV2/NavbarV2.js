@@ -22,9 +22,10 @@ const NavbarV2 = ({isAuthenticated}) => {
           <Link to='/league/766/Primeira-Liga'>Primeira Liga</Link>
           <Link to='/Discussion'>Discussion Page</Link>
           <Link to='/Quiz'>Quiz</Link>
+            {console.log('INFO: isAuthenticated =', isAuthenticated)}
             {!isAuthenticated
-              ? <Link to='/Login'><span className="loginImg" role="img" aria-label="profile">👤</span></Link>
-              : <Link to='/Logout'><img alt="logout" src={logoutImg} className="logoutImg"></img></Link>
+              ? <Link to='/Login' className="imgContainer"><span className="loginImg" role="img" aria-label="profile">👤</span></Link>
+              : <Link to='/Logout' className="imgContainer"><span className="loginImg" role="img" aria-label="profile">📤</span></Link>
             }
         </div>
       </div>

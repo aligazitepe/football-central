@@ -72,7 +72,16 @@ div.borderXwidth a:hover:before, div.borderXwidth a:hover:after {
     width: 100%;
 }
 
-.logoutImage {
-  width: 25px;
+/* .logoutImage {
+  /* width: 25px;
   height: 25px;
+}*/
+
+.imgContainer {
+  position: relative;
+}
+
+.loginImg, .logoutImg {
+  position: absolute;
+  left: 0;
 }

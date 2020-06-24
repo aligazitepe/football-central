@@ -32,7 +32,7 @@ function App() {
       <div className="App">
 
 
-        <NavbarV2 />
+        <NavbarV2 isAuthenticated={isAuthenticated}/>
 
 
         <Switch>
