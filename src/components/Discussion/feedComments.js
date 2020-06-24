@@ -106,7 +106,7 @@ function FeedCards(props) {
     props.location.state.comments.length ?
     props.location.state.comments.map(comment => (
       <Card className={classes.root}>
-        <div style={{ marginLeft: 15}}>Posted by: {comment.commentFirstName? comment.commentFirstName+" "+comment.commentLastName:"anonymouse"}</div>
+        <div style={{ marginLeft: 15}}>Posted by: {comment.commentFirstName? comment.commentFirstName+" "+comment.commentLastName:"anonymous"}</div>
         <div style={{ padding: 10, fontSize: 20, marginLeft: 15 }}>
           {typeof comment == 'string' ? comment : comment['text']}
         </div>
