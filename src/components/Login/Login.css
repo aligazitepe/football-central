@@ -4,7 +4,8 @@
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
-  align-items: center
+  align-items: center;
+  padding-top: 120px;
 }
 
 .form {
@@ -23,7 +24,6 @@ input,
   border: 1px solid #E6E6E6;
   font-weight: bold;
   padding: 0px 20px;
-
 }
 
 .formContainer button,
