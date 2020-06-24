@@ -21,6 +21,7 @@ const NavbarV2 = ({isAuthenticated}) => {
           <Link to='/league/525/Ligue-1'>Ligue 1</Link>
           <Link to='/league/766/Primeira-Liga'>Primeira Liga</Link>
           <Link to='/Discussion'>Discussion Page</Link>
+          <Link to='/Quiz'>Quiz</Link>
             {!isAuthenticated
               ? <Link to='/Login'><span className="loginImg" role="img" aria-label="profile">👤</span></Link>
               : <Link to='/Logout'><img alt="logout" src={logoutImg} className="logoutImg"></img></Link>
