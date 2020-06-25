@@ -1,5 +1,6 @@
 .QuizMain{
-    padding: 9px;
+    margin:100px;
+    padding: 25px;
     text-align: center;
     background-color: #54b16e;
     font-family: Arial;
@@ -7,6 +8,9 @@
     font-size: 18px;
     list-style-type: none;
    
+}
+.Finish{
+margin:100px;
 }
 
 /* The answer selecteed by the user */

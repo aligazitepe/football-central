@@ -78,7 +78,7 @@ export class Quiz extends Component {
     const { question, options, currentIndex, userAnswer, quizEnd } = this.state;
     if(quizEnd) {
         return (
-            <div>
+            <div className="Finish">
                 <h1>Game Over. Final score is {this.state.score} points</h1>
                 <p>The correct Answers for the quiz are</p>
                 <ul>
