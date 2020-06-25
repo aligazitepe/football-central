@@ -20,7 +20,7 @@ export function createPost(data, cb) {
           type: CREATE_POST_SUCCESS,
           payload: response.data.post,
         });
-        alert(response.data.message);
+
         cb();
       } else {
         if (response.data.type === "error") {

@@ -2,7 +2,7 @@ import moment from 'moment';
 
 // Constants
 const BASE_URL = 'https://api-football-v1.p.rapidapi.com/v2';
-const API_KEY = 'abc123' || process.env.REACT_APP_FOOTBALL_API_KEY;
+const API_KEY = process.env.REACT_APP_FOOTBALL_API_KEY;
 const API_HOST = process.env.REACT_APP_FOOTBALL_API_HOST;
 const API_OPTIONS = {
   "method": "GET",
@@ -16,6 +16,7 @@ const leagueIDs = [766, 775, 524, 754, 525, 891];
 
 // Fetch Factory
 const fetchRequest = (url, options = {}) => {
+  console.info('fetch to football API made..');
   return fetch(`${BASE_URL}/${url}`, API_OPTIONS)
     .then(res => res.status < 400 ? res : Promise.reject(res))
     .then(res => res.json())
@@ -27,30 +28,15 @@ const fetchRequest = (url, options = {}) => {
 
 // Get fixtures for today's date and filter for those with the desired leagueIDs
 const getTodaysFixtures = () => {
-  // return fetchRequest (`fixtures/date/${moment().format("YYYY-MM-DD")}`)
-  //   .then(data => data.api.fixtures.filter(fixture => leagueIDs.includes(fixture.league_id)))
-
-  return new Promise(
-    function(resolve, reject) {
-      resolve(
-        fakeFixtures.api.fixtures.filter(fixture => leagueIDs.includes(fixture.league_id))
-      )
-    }
-  )
+  return fetchRequest (`fixtures/date/${moment().format("YYYY-MM-DD")}`)
+    .then(data => data.api.fixtures.filter(fixture => leagueIDs.includes(fixture.league_id)))
 }
 
 
 // Get fixtures for yesterday's date and filter for those with the desired leagueIDs
 const getYesterdaysFixtures = () => {
-  // return fetchRequest (`fixtures/date/${moment().subtract(1, 'days').format("YYYY-MM-DD")}`)
-  //   .then(data => data.api.fixtures.filter(fixture => leagueIDs.includes(fixture.league_id)))
-     return new Promise(
-      function(resolve, reject) {
-        resolve(
-          fakeFixtures.api.fixtures.filter(fixture => leagueIDs.includes(fixture.league_id))
-        )
-      }
-    )
+  return fetchRequest (`fixtures/date/${moment().subtract(1, 'days').format("YYYY-MM-DD")}`)
+    .then(data => data.api.fixtures.filter(fixture => leagueIDs.includes(fixture.league_id)))
   }
 
 // Get all fixture data by fixtureID
@@ -130,55 +116,6 @@ const getCountries = () => {
   return fetchRequest (`countries`)
     .then(data => data.api.countries)
 }
-
-const fakeFixtures =
-{
-  "api": {
-      "results": 380,
-      "fixtures": [
-          {
-              "fixture_id": 65,
-              "league_id": 2,
-              "league": {
-                  "name": "Premier League",
-                  "country": "England",
-                  "logo": "https://media.api-sports.io/football/leagues/2.png",
-                  "flag": "https://media.api-sports.io/flags/gb.svg"
-              },
-              "event_date": "2018-08-10T19:00:00+00:00",
-              "event_timestamp": 1533927600,
-              "firstHalfStart": 1533927600,
-              "secondHalfStart": 1533931200,
-              "round": "Regular Season - 1",
-              "status": "Match Finished",
-              "statusShort": "FT",
-              "elapsed": 90,
-              "venue": "Old Trafford (Manchester)",
-              "referee": null,
-              "homeTeam": {
-                  "team_id": 33,
-                  "team_name": "Manchester United",
-                  "logo": "https://media.api-sports.io/football/teams/33.png"
-              },
-              "awayTeam": {
-                  "team_id": 46,
-                  "team_name": "Leicester",
-                  "logo": "https://media.api-sports.io/football/teams/46.png"
-              },
-              "goalsHomeTeam": 2,
-              "goalsAwayTeam": 1,
-              "score": {
-                  "halftime": "1-0",
-                  "fulltime": "2-1",
-                  "extratime": null,
-                  "penalty": null
-              }
-          }
-      ]
-  }
-}
-
-
 
 export default {
   getTodaysFixtures,
