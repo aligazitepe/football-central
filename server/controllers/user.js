@@ -81,11 +81,17 @@ const createUpload = async (req, res, next) => {
     body: {name}
   } = req;
 
-  if(file.detectedFileExtention != ".jpg") next(new Error("invalid file type"));
-  const fileName = name + Math.floor(Math.random * 1000) + file.detectedFileExtention;
-  await pipeline(file.stream, fs.createWriteStream(`${__dirname}/../../public/images/${fileName}`))
-  res.send("File uploaded as " + fileName)
+  if (file.detectedFileExtension != ".jpg") next(new Error("invalid file type"));
+  const fileName = name +  Math.floor(Math.random() * 1000) + ".jpg" ;
+  await pipeline(
+    file.stream,
+     fs.createWriteStream(`${__dirname}/../../public/images/${fileName}`)
+     
+     
+     );
+res.send("File uploaded as " + fileName)
 };
+
 
 module.exports = { create, login, profile, logout, createUpload };
 // create write stream let writer = fs.createWriteStream(path)

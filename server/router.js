@@ -15,6 +15,6 @@ router.post('/createPost', postController.createPost);
 router.delete('/deletePost/:id', postController.deletePost);
 router.get('/getAllPosts', postController.getAllPosts);
 router.post('/createComment', postController.createComment);
-router.post('/upload',upload.single("file"), userController.createUpload);
+router.post('/upload', upload.single("file"), userController.createUpload);
 
 module.exports = router;

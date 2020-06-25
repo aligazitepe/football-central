@@ -56,7 +56,7 @@ function FeedCards(props) {
     }
 
 
-  console.log("Feed Item: ", props.feed)
+  console.log("Feed Item: ", props.feed, props)
 
   function handleDelete (){
     alert("Post deleted!")
@@ -71,8 +71,8 @@ function FeedCards(props) {
     <Card className={classes.root}>
       <CardHeader 
        avatar={
-        <Avatar style={{backgroundColor:"rgba(33, 181, 100, 0.93)"}}aria-label="recipe" className={classes.avatar}>
-          
+        <Avatar src="..../../public/images/Beee.jpg" style={{backgroundColor:"rgba(33, 181, 100, 0.93)"}}aria-label="recipe" className={classes.avatar}>
+        
         </Avatar>
       }
         action={
